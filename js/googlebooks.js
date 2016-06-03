@@ -30,7 +30,7 @@ GoogleBooks.prototype = {
             p = document.createElement('p'),
             img = document.createElement("img");
 
-        h2.innerHTML = v.volumeInfo.title;
+        h2.innerHTML = v.volumeInfo.title ? v.volumeInfo.title : '';
         p.innerHTML = this.truncateLenght(v.volumeInfo.description);
 
         if (v.volumeInfo.imageLinks) {

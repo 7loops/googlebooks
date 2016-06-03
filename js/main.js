@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         query: "javascript",
         orderBy: "newest",
         container: document.querySelector('.book-list'),
-        HttpClient,
+        HttpClient:HttpClient,
         maxChars: 200,
         maxResults: 20
     }
