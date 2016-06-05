@@ -1,2 +1,11 @@
 # googlebooks
-simple example of google book API implementation in vanilla javascript
+
+Simple example of Google books API implementation
+
+### Run Google books API
+
+Just open index.html
+
+### Run tests
+
+Open tests.html

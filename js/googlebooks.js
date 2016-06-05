@@ -1,12 +1,12 @@
 var HttpClient = function() {
     this.get = function(url, callback) {
-        var anHttpRequest = new XMLHttpRequest();
-        anHttpRequest.onreadystatechange = function() {
-            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                callback(anHttpRequest.responseText);
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = function() {
+            if (httpRequest.readyState == 4 && httpRequest.status == 200)
+                callback(httpRequest.responseText);
         }
-        anHttpRequest.open("GET", url, true);
-        anHttpRequest.send(null);
+        httpRequest.open("GET", url, true);
+        httpRequest.send(null);
     }
 }
 
@@ -15,39 +15,41 @@ var GoogleBooks = function (settings) {
     this.container = settings.container;
     this.HttpClient = new settings.HttpClient();
     this.maxChars = settings.maxChars;
+    this.results = {};
 }
 
 GoogleBooks.prototype = {
     constructor: GoogleBooks,
 
     truncateLenght: function(dsc) {
-        return dsc ? dsc.substr(0, Math.min(dsc.length, dsc.substr(0, this.maxChars).lastIndexOf(" "))) : "/";
+        var dots = dsc.length > this.maxChars ? "..." : "";
+        return dsc ? dsc.substr(0, Math.min(dsc.length, dsc.substr(0, this.maxChars).lastIndexOf(" "))) + dots : "/";
     },
 
-    createItem: function(v) {
+    createItem: function(bookItem) {
         var div = document.createElement('div'),
             h2 = document.createElement('h2'),
             p = document.createElement('p'),
             img = document.createElement("img");
 
-        h2.innerHTML = v.volumeInfo.title ? v.volumeInfo.title : '';
-        p.innerHTML = this.truncateLenght(v.volumeInfo.description);
+        h2.innerHTML = bookItem.volumeInfo.title ? bookItem.volumeInfo.title : '';
+        p.innerHTML = this.truncateLenght(bookItem.volumeInfo.description);
 
-        if (v.volumeInfo.imageLinks) {
-            img.setAttribute('src', v.volumeInfo.imageLinks.smallThumbnail);
+        if (bookItem.volumeInfo.imageLinks) {
+            img.setAttribute('src', bookItem.volumeInfo.imageLinks.smallThumbnail);
         }
 
         div.appendChild(img);
         div.appendChild(h2);
         div.appendChild(p);
-        this.container.appendChild(div);
+        this.container ? this.container.appendChild(div) : null;
     },
 
     populateData: function(response) {
-        var results = JSON.parse(response);
+        this.results = JSON.parse(response);
 
-        if (results && results.items) {
-            results.items.forEach(this.createItem.bind(this));
+        if (this.results && this.results.items) {
+            this.results.items.forEach(this.createItem.bind(this));
         } else {
             this.container.innerHTML = "No results";
         }

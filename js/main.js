@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         maxResults: 20
     }
 
-    gb = new GoogleBooks(settings);
-    gb.getBooks();
+    var Gb = new GoogleBooks(settings);
+    Gb.getBooks();
 
 });

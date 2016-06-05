@@ -8,13 +8,18 @@ body {
 h1 {
   text-align: center;
 }
+h1, h2 {
+  color:#4089aa;
+}
 .book-list {
   width:100%;
   max-width: 900px;
   margin:0 auto;
+  padding:15px;
   background-color: #fff;
   clear:both;
   overflow: auto;
+  border:1px solid #E8E8E8;
 }
 .book-list>div {
   width:50%;
@@ -26,10 +31,12 @@ h1 {
 }
 .book-list h2{
   margin-left: 160px;
+  font-size:21px;
   margin-top:0;
 }
 .book-list p{
   margin-left: 160px;
+  font-size:14px;
 }
 .book-list img{
   float:left;
