@@ -26,6 +26,11 @@ GoogleBooks.prototype = {
         return dsc ? dsc.substr(0, Math.min(dsc.length, dsc.substr(0, this.maxChars).lastIndexOf(" "))) + dots : "/";
     },
 
+    makeGrey: function () {
+        // we use jQuery for the greyscale support on IE10 and IE11
+        $('.book-list img').gray();
+    },
+
     createItem: function(bookItem) {
         var div = document.createElement('div'),
             h2 = document.createElement('h2'),
@@ -37,6 +42,7 @@ GoogleBooks.prototype = {
 
         if (bookItem.volumeInfo.imageLinks) {
             img.setAttribute('src', bookItem.volumeInfo.imageLinks.smallThumbnail);
+            img.className += " grayscale";
         }
 
         div.appendChild(img);
@@ -53,6 +59,7 @@ GoogleBooks.prototype = {
         } else {
             this.container.innerHTML = "No results";
         }
+        this.makeGrey();
     },
 
     getBooks: function() {

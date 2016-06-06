@@ -30,31 +30,17 @@ h1, h2 {
     clear:both;
 }
 .book-list h2{
-  margin-left: 160px;
+  margin-left: 130px;
   font-size:21px;
   margin-top:0;
 }
 .book-list p{
-  margin-left: 160px;
+  margin-left: 130px;
   font-size:14px;
 }
 .book-list img{
   float:left;
-  width:130px;
-  -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
-  filter: grayscale(100%);
-}
-@media (max-width: 800px) {
-  .book-list h2{
-    margin-left: 130px;
-  }
-  .book-list p{
-    margin-left: 130px;
-  }
-  .book-list img{
-    float:left;
-    width:100px;
-  }
+  width:100px;
 }
 @media (max-width: 650px) {
   .book-list>div {
